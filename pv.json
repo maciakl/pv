@@ -1,0 +1,9 @@
+{
+    "version": "0.1.0",
+    "description": "A new scoop package",
+    "homepage": "https://github.com/maciakl/pv",
+    "checkver": "github",
+    "url": "https://github.com/maciakl/pv/releases/download/v0.1.0/pv_win.zip",
+    "bin": "pv.exe",
+    "license": "freeware"
+}
