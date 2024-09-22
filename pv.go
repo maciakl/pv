@@ -45,7 +45,7 @@ var (
     wordviewerargs = "--to=plain"
 
     excelviewer = "xlsx2csv"
-    excelviewerargs = ""
+    excelviewerargs = "-o=-"
 
     webviewer = "lynx"
     webviewerargs = "-dump"

@@ -24,18 +24,13 @@ You can configure the previewers and their arguments by creating a `~/.pvrc` fil
 Here is an example:
     
     imageviewer = chafa
-
     mdviewer = glow
     mdviewerargs = --style=dark
-
     wordviewer = pandoc
     wordviewerargs = --to=ansi
-
     webviewer = w3m
     webviewerargs = -dump
-
     exeviewer = file
-
     defaultviewer = less
 
 You only have specify the "args" if you want to pass additional arguments to the previewer. If you don't specify a viewer for a given file type, the default viewer will be used.
@@ -48,7 +43,7 @@ It will display the program version as well as the current configuration.
 
 ### Configuration options
 
-The "viewer" options need to be actual executables or executable scripts. The "args" options are optional and can be any arguments you want to pass to the viewer.
+The "viewer" options need to be actual executables or executable scripts that output their results to stdout. The "args" options are optional and can be any arguments you want to pass to the viewer.
 
 
 - `imageviewer` - used with the following file extensions: ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".svg", ".webp", ".ico", ".jit", ".jif", ".jfi"
@@ -104,7 +99,7 @@ Current defaults are:
         sevenzviewer:    7z l
         rarviewer:       unrar l
         wordviewer:      pandoc --to=plain
-        excelviewer:     xlsx2csv
+        excelviewer:     xlsx2csv -o=-
         webviewer:       lynx -dump
         exeviewer:       exiftool
         defaultviewer:   bat --color=always
