@@ -22,6 +22,8 @@ Or you can use it as a previewer in lf. Add this to your `lfrc`:
 You can configure the previewers and their arguments by creating a `~/.pvrc` file (it's `%USERPROFILE%\.pvrc` on Windoes). 
 
 Here is an example:
+    
+    imageviewer = chafa
 
     mdviewer = glow
     mdviewerargs = --style=dark
@@ -43,7 +45,6 @@ You can check the current configuration by running:
     pv -version
 
 It will display the program version as well as the current configuration.
-
 
 ### Configuration options
 
@@ -89,7 +90,24 @@ The "viewer" options need to be actual executables or executable scripts. The "a
 - `defaultviewer` - used when no other viewer is specified
 - `defaultviewerargs` - optional args for the default viewer
 
-Using `bat` as the default viewer is recommended as it usually works well with most file types. You can also use `cat` or `less` if you prefer.
+Using `bat` as the default viewer is recommended as it usually works well with most file types.
+
+Current defaults are:
+
+        imageviewer:     chafa
+        textviewer:      bat
+        mdviewer:        glow --style=dracula
+        pdfviewer:       pdftotext -
+        musicviewer:     exiftool
+        videoviewer:     exiftool
+        zipviewer:       unzip -l
+        sevenzviewer:    7z l
+        rarviewer:       unrar l
+        wordviewer:      pandoc --to=plain
+        excelviewer:     xlsx2csv
+        webviewer:       lynx -dump
+        exeviewer:       exiftool
+        defaultviewer:   bat --color=always
 
 ## Depedencies
 
