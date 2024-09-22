@@ -44,8 +44,14 @@ var (
     wordviewer = "pandoc"
     wordviewerargs = "--to=plain"
 
+    excelviewer = "xlsx2csv"
+    excelviewerargs = ""
+
     webviewer = "lynx"
     webviewerargs = "-dump"
+
+    exeviewer = "exiftool"
+    exeviewerargs = ""
 
     defaultviewer = "bat"
     defaultviewerargs = "--color=always"
@@ -78,7 +84,9 @@ func main() {
         fmt.Println("\tsevenzviewer:\t", sevenzviewer, sevenzviewerargs)
         fmt.Println("\trarviewer:\t", rarviewer, rarviewerargs)
         fmt.Println("\twordviewer:\t", wordviewer, wordviewerargs)
+        fmt.Println("\texcelviewer:\t", excelviewer, excelviewerargs)
         fmt.Println("\twebviewer:\t", webviewer, webviewerargs)
+        fmt.Println("\texeviewer:\t", webviewer, exeviewerargs)
         fmt.Println("\tdefaultviewer:\t", defaultviewer, defaultviewerargs)
         os.Exit(0)
     }
@@ -124,8 +132,14 @@ func main() {
         case "Word":
             cmd = exec.Command(wordviewer, wordviewerargs, path)
 
+        case "Excel":
+            cmd = exec.Command(excelviewer, excelviewerargs, path)
+
         case "HTML":
             cmd = exec.Command(webviewer, webviewerargs, path)
+
+        case "EXE":
+            cmd = exec.Command(exeviewer, exeviewerargs, path)
 
         // bat is a good default for everything else
         // it will just display [binary file] for unknown types
@@ -153,7 +167,6 @@ func getFileType(path string) string {
 
     switch ext {
         
-        // image files
         case ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".svg", ".webp", ".ico", ".jit", ".jif", ".jfi":
             return "Image"
 
@@ -168,10 +181,9 @@ func getFileType(path string) string {
             return "Video"
 
         // markdown files
-        case ".md", ".markdown":
+        case ".md", ".markdown", ".mkd", ".mkdn", ".mdown", ".mdwn", ".mdtxt", ".mdtext":
             return "Markdown"
 
-        // zip files
         case ".zip", ".jar":
             return "Zip"
 
@@ -187,7 +199,13 @@ func getFileType(path string) string {
         case ".docx", ".odt", ".rtf":
             return "Word"
 
-        case ".html", ".htm":
+        case ".xlsx":
+            return "Excel"
+
+        case ".exe", ".msi", ".msx", ".dll":
+            return "EXE"
+
+        case ".html", ".htm", ".xhtml", ".mhtml", ".mht":
             return "HTML"
 
         default:
@@ -264,10 +282,18 @@ func readConfig() {
                 wordviewer = value
             case "wordviewerargs":
                 wordviewerargs = value
+            case "excelviewer":
+                excelviewer = value
+            case "excelviewerargs":
+                excelviewerargs = value
             case "webviewer":
                 webviewer = value
             case "webviewerargs":
                 webviewerargs = value
+            case "exeviewer":
+                exeviewer = value
+            case "exeviewerargs":
+                exeviewerargs = value
             case "defaultviewer":
                 defaultviewer = value
             case "defaultviewerargs":

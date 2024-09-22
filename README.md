@@ -23,36 +23,18 @@ You can configure the previewers and their arguments by creating a `~/.pvrc` fil
 
 Here is an example:
 
-    
-    imageviewer = chafa
-    textviewer = bat
-
     mdviewer = glow
-    mdviewerargs = --style=dracula
-
-    pdfviewer = pdftotext
-    pdfviewerargs = -
-
-    musicviewer = exiftool
-    videoviewer = exiftool
-
-    zipviewer = unzip
-    zipviewerargs = -l
-
-    sevenzviewer = 7z
-    sevenzviewerargs = l
-
-    rarviewer = unrar
-    rarviewerargs = l
+    mdviewerargs = --style=dark
 
     wordviewer = pandoc
-    wordviewerargs = --to=plain
+    wordviewerargs = --to=ansi
 
-    webviewer = lynx
+    webviewer = w3m
     webviewerargs = -dump
 
-    defaultviewer = bat
-    defaultviewerargs = --color=always
+    exeviewer = file
+
+    defaultviewer = less
 
 You only have specify the "args" if you want to pass additional arguments to the previewer. If you don't specify a viewer for a given file type, the default viewer will be used.
 
@@ -61,6 +43,53 @@ You can check the current configuration by running:
     pv -version
 
 It will display the program version as well as the current configuration.
+
+
+### Configuration options
+
+The "viewer" options need to be actual executables or executable scripts. The "args" options are optional and can be any arguments you want to pass to the viewer.
+
+
+- `imageviewer` - used with the following file extensions: ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".svg", ".webp", ".ico", ".jit", ".jif", ".jfi"
+- `imageviewerargs` -  optional args for the image viewer
+
+- `mdviewer` - used with the following file extensions: ".md", ".markdown", ".mkd", ".mkdn", ".mdwn", ".mdown", ".mdtxt"
+- `mdviewerargs` - optional args for the markdown viewer
+
+- `pdfviewer` - used with the following file extensions: ".pdf"
+- `pdfviewerargs` - optional args for the pdf viewer
+
+- `musicviewer` - used with the following file extensions: ".mp3", ".flac", ".wav", ".ogg", ".m4a", ".wma", ".aac", ".aiff", ".alac", ".ape", ".dsd", ".dts", ".mka", ".mpc", ".ofr", ".ofs", ".opus", ".tak", ".tta", ".wv"
+- `musicviewerargs` - optional args for the music viewer
+
+- `videoviewer` - used with the following file extensions: ".mp4", ".mkv", ".webm", ".avi", ".mov", ".wmv", ".flv", ".3gp", ".mpg", ".mpeg", ".m2v", ".m4v", ".m2ts", ".ts", ".mts", ".vob", ".divx", ".xvid", ".rm", ".rmvb", ".asf", ".ogv", ".3g2", ".f4v", ".h264", ".h265", ".hevc", ".vp9", ".vp8", ".av1"
+- `videoviewerargs` = ""
+
+- `zipviewer` - used with the following file extensions: ".zip", ".jar"
+- `zipviewerargs` - optional args for the zip viewer
+
+- `sevenzviewer` - used with the following file extensions: ".7z"
+- `sevenzviewerargs` - optional args for the 7z viewer
+
+- `rarviewer` - used with the following file extensions: ".rar"
+- `rarviewerargs` - optional args for the rar viewer
+
+- `wordviewer` - used with the following file extensions: ".doc", ".docx", ".odt", ".rtf"
+- `wordviewerargs` - optional args for the word viewer
+
+- `excelviewer` - used with the following file extensions: ".xlsx"
+- `excelviewerargs` - optional args for the excel viewer
+
+- `webviewer` - used with the following file extensions: ".html", ".htm", ".xhtml", ".mhtml", ".mht"
+- `webviewerargs` - optional args for the web viewer
+
+- `exeviewer` - used with the following file extensions: ".exe", ".dll", ".msi", ".sys", ".msx"
+- `exeviewerargs` - optional args for the exe viewer
+
+- `defaultviewer` - used when no other viewer is specified
+- `defaultviewerargs` - optional args for the default viewer
+
+Using `bat` as the default viewer is recommended as it usually works well with most file types. You can also use `cat` or `less` if you prefer.
 
 ## Depedencies
 
