@@ -17,14 +17,58 @@ Or you can use it as a previewer in lf. Add this to your `lfrc`:
     set previewer pv
 
 
+## Configuration
+
+You can configure the previewers and their arguments by creating a `~/.pvrc` file (it's `%USERPROFILE%\.pvrc` on Windoes). 
+
+Here is an example:
+
+    
+    imageviewer = chafa
+    textviewer = bat
+
+    mdviewer = glow
+    mdviewerargs = --style=dracula
+
+    pdfviewer = pdftotext
+    pdfviewerargs = -
+
+    musicviewer = exiftool
+    videoviewer = exiftool
+
+    zipviewer = unzip
+    zipviewerargs = -l
+
+    sevenzviewer = 7z
+    sevenzviewerargs = l
+
+    rarviewer = unrar
+    rarviewerargs = l
+
+    wordviewer = pandoc
+    wordviewerargs = --to=plain
+
+    webviewer = lynx
+    webviewerargs = -dump
+
+    defaultviewer = bat
+    defaultviewerargs = --color=always
+
+You only have specify the "args" if you want to pass additional arguments to the previewer. If you don't specify a viewer for a given file type, the default viewer will be used.
+
+You can check the current configuration by running:
+
+    pv -version
+
+It will display the program version as well as the current configuration.
+
 ## Depedencies
 
-You need a previewer for each file type. Right now these hare hard coded, but in the future 
-there will be support for a config file.
+You need a previewer for each file type.
 
 The default previewers are:
 
-- [bat](https://github.com/sharkdp/bat) (for text files)
+- [bat](https://github.com/sharkdp/bat) (default viewer)
 - [chafa](https://hpjansson.org/chafa/) (for images)
 - [glow](https://github.com/charmbracelet/glow) (for markdown files)
 - [exiftool](https://exiftool.org/) (for audio and video files)

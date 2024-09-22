@@ -4,14 +4,15 @@ import (
     "os"
     "fmt"
     "flag"
+    "bufio"
     "strings"
     "os/exec"
     "path/filepath"
 )
 
-const version = "0.1.0"
+const version = "0.2.0"
 
-const (
+var (
 
     imageviewer = "chafa"
     imageviewerargs = ""
@@ -58,9 +59,27 @@ func main() {
     flag.BoolVar(&ver, "version", false, "display version number and exit")
     flag.Parse()
 
+    readConfig()
+
     // show version and exit
     if ver {
         fmt.Println(filepath.Base(os.Args[0]), "version", version)
+        home,_ := os.UserHomeDir()
+        fmt.Println("Config file:", filepath.Join(home, ".pvrc"))
+
+        fmt.Println("\nConfiguration:")
+        fmt.Println("\timageviewer:\t", imageviewer, imageviewerargs)
+        fmt.Println("\ttextviewer:\t", textviewer, textviewerargs)
+        fmt.Println("\tmdviewer:\t", mdviewer, mdviewerargs)
+        fmt.Println("\tpdfviewer:\t", pdfviewer, pdfviewerargs)
+        fmt.Println("\tmusicviewer:\t", musicviewer, musicviewerargs)
+        fmt.Println("\tvideoviewer:\t", videoviewer, videoviewerargs)
+        fmt.Println("\tzipviewer:\t", zipviewer, zipviewerargs)
+        fmt.Println("\tsevenzviewer:\t", sevenzviewer, sevenzviewerargs)
+        fmt.Println("\trarviewer:\t", rarviewer, rarviewerargs)
+        fmt.Println("\twordviewer:\t", wordviewer, wordviewerargs)
+        fmt.Println("\twebviewer:\t", webviewer, webviewerargs)
+        fmt.Println("\tdefaultviewer:\t", defaultviewer, defaultviewerargs)
         os.Exit(0)
     }
 
@@ -175,9 +194,84 @@ func getFileType(path string) string {
             return "Other"
 
     }
+}
 
 
+// read in the ~/.pvrc file line by line and set the variables
+func readConfig() {
+    home,_ := os.UserHomeDir()
+    file, err := os.Open(filepath.Join(home, ".pvrc"))
+    if err != nil {
+        return
+    }
+    defer file.Close()
 
+    scanner := bufio.NewScanner(file)
+    for scanner.Scan() {
 
+        line := scanner.Text()
 
+        if strings.HasPrefix(line, "#") {
+            continue
+        }
+
+        parts := strings.SplitN(line, "=", 2)
+        if len(parts) != 2 {
+            continue
+        }
+
+        key := strings.TrimSpace(parts[0])
+        value := strings.TrimSpace(parts[1])
+
+        switch key {
+            case "imageviewer":
+                imageviewer = value
+            case "imageviewerargs":
+                imageviewerargs = value
+            case "textviewer":
+                textviewer = value
+            case "textviewerargs":
+                textviewerargs = value
+            case "mdviewer":
+                mdviewer = value
+            case "mdviewerargs":
+                mdviewerargs = value
+            case "pdfviewer":
+                pdfviewer = value
+            case "pdfviewerargs":
+                pdfviewerargs = value
+            case "musicviewer":
+                musicviewer = value
+            case "musicviewerargs":
+                musicviewerargs = value
+            case "videoviewer":
+                videoviewer = value
+            case "videoviewerargs":
+                videoviewerargs = value
+            case "zipviewer":
+                zipviewer = value
+            case "zipviewerargs":
+                zipviewerargs = value
+            case "sevenzviewer":
+                sevenzviewer = value
+            case "sevenzviewerargs":
+                sevenzviewerargs = value
+            case "rarviewer":
+                rarviewer = value
+            case "rarviewerargs":
+                rarviewerargs = value
+            case "wordviewer":
+                wordviewer = value
+            case "wordviewerargs":
+                wordviewerargs = value
+            case "webviewer":
+                webviewer = value
+            case "webviewerargs":
+                webviewerargs = value
+            case "defaultviewer":
+                defaultviewer = value
+            case "defaultviewerargs":
+                defaultviewerargs = value
+        }
+    }
 }
