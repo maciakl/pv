@@ -22,7 +22,6 @@ Or you can use it as a previewer in lf. Add this to your `lfrc`:
 You can configure the previewers and their arguments by creating a `~/.pvrc` file (it's `%USERPROFILE%\.pvrc` on Windoes). 
 
 Here is an example:
-
     
     imageviewer = chafa
     textviewer = bat
@@ -61,6 +60,21 @@ You can check the current configuration by running:
     pv -version
 
 It will display the program version as well as the current configuration.
+
+Current defaults are:
+
+        imageviewer:     chafa
+        textviewer:      bat
+        mdviewer:        glow --style=dracula
+        pdfviewer:       pdftotext -
+        musicviewer:     exiftool
+        videoviewer:     exiftool
+        zipviewer:       unzip -l
+        sevenzviewer:    7z l
+        rarviewer:       unrar l
+        wordviewer:      pandoc --to=plain
+        webviewer:       lynx -dump
+        defaultviewer:   bat --color=always
 
 ## Depedencies
 
