@@ -121,7 +121,15 @@ The default previewers are:
 
 
 
-## Installation on Windows
+## Installation
+
+### Via Go
+
+Install via go:
+ 
+    go install github.com/maciakl/jjmp@latest
+
+### On Windows
 
 First get [scoop](https://scoop.sh/). Then install all the prerequisites with:
 
