@@ -127,7 +127,7 @@ The default previewers are:
 
 Install via go:
  
-    go install github.com/maciakl/jjmp@latest
+    go install github.com/maciakl/pv@latest
 
 ### On Windows
 
