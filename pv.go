@@ -86,7 +86,7 @@ func main() {
         fmt.Println("\twordviewer:\t", wordviewer, wordviewerargs)
         fmt.Println("\texcelviewer:\t", excelviewer, excelviewerargs)
         fmt.Println("\twebviewer:\t", webviewer, webviewerargs)
-        fmt.Println("\texeviewer:\t", webviewer, exeviewerargs)
+        fmt.Println("\texeviewer:\t", exeviewer, exeviewerargs)
         fmt.Println("\tdefaultviewer:\t", defaultviewer, defaultviewerargs)
         os.Exit(0)
     }
