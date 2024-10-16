@@ -9,7 +9,7 @@ import (
     "path/filepath"
 )
 
-const version = "0.2.2"
+const version = "0.3.0"
 
 var (
 
