@@ -117,9 +117,9 @@ Current defaults are:
         excel_viewer:     xlsx2csv -o=- <file>
         web_viewer:       lynx -dump <file>
         exe_viewer:       hyxel <file>
-        log_viewer:      bat --color=always <file>
-        naked_viewer:    bat --color=always <file>
-        defaultviewer:   bat --color=always <file>
+        log_viewer:       bat --color=always <file>
+        naked_viewer:     bat --color=always <file>
+        defaultviewer:    bat --color=always <file>
 
 Using `bat` as the `default_viewer` is recommended as it usually works well with most file types (even binary ones).
 
