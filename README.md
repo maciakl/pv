@@ -104,19 +104,19 @@ The `_viewer` option needs to be set to a string that represents a file name of 
 
 Current defaults are:
 
-        imageviewer:     chafa <file>
-        textviewer:      bat --color=always <file> --theme=dracula
-        mdviewer:        glow --style=dracula <file>
-        pdfviewer:       pdftotext <file> -
-        musicviewer:     exiftool
-        videoviewer:     exiftool
-        zipviewer:       unzip -l <file>
-        sevenzviewer:    7z l <file>
-        rarviewer:       unrar l <file>
-        wordviewer:      pandoc --to=plain <file>
-        excelviewer:     xlsx2csv -o=- <file>
-        webviewer:       lynx -dump <file>
-        exeviewer:       hyxel <file>
+        image_viewer:     chafa <file>
+        text_viewer:      bat --color=always <file> --theme=dracula
+        md_viewer:        glow --style=dracula <file>
+        pdf_viewer:       pdftotext <file> -
+        music_viewer:     exiftool
+        video_viewer:     exiftool
+        zip_viewer:       unzip -l <file>
+        sevenz_viewer:    7z l <file>
+        rar_viewer:       unrar l <file>
+        word_viewer:      pandoc --to=plain <file>
+        excel_viewer:     xlsx2csv -o=- <file>
+        web_viewer:       lynx -dump <file>
+        exe_viewer:       hyxel <file>
         log_viewer:      bat --color=always <file>
         naked_viewer:    bat --color=always <file>
         defaultviewer:   bat --color=always <file>
