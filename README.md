@@ -38,16 +38,11 @@ No spaces!
 
 Here is an example:
     
-    image_viewer=chafa
-    md_viewer=glow
-    md_viewer_opts=--style=dark
-    word_viewer=pandoc
-    word_viewer_args=--to=ansi
-    web_viewer=w3m
-    exe_viewer=file
-    default_viewer=less
-
-Each viewer has a corresponding `_args` and `_opts` setting, both of which are optional and only need to be specified if you want to override the defaults. Both are used to pass additional arguments to the viewer executable. The difference is as follows:
+    text_viewer=bat
+    text_viewer_opts=--color=always
+    text_viewer_args=--theme=dracula
+    
+Each `viewer` has a corresponding `_args` and `_opts` setting, both of which are optional and only need to be specified if you want to override the defaults. Both are used to pass additional arguments to the viewer executable. The difference is as follows:
 
 - The `_opts` arguments are passed before the file path
 - The `_args` arguments are passed after the file path
@@ -60,7 +55,7 @@ This will output the current configuration and corresponding opt and arg values.
 
 ### Viewers
 
-Following viewers and the extensions that each is associated with:
+Following viewers are available to be overriden. Each one is listed alongside the the extensions that it is associated with:
 
 |Viewer|Extensions|
 |---|---|
@@ -83,6 +78,8 @@ Currently there is no way to change the file extension association via the confi
 
 The "viewer" option need to be set to a string that represents a file name of an actual executables or executable script that is in your PATH and that outpus their results to stdout.
 
+### Defaults
+
 Current defaults are:
 
         imageviewer:     chafa <file>
@@ -101,6 +98,13 @@ Current defaults are:
         defaultviewer:   bat --color=always <file>
 
 Using `bat` as the default viewer is recommended as it usually works well with most file types.
+
+### Overriding Default Arguments
+
+To override the default `_opt` or `_arg` value for a specific viewer, simply provide a new one in the config file. To override it with nothing, put nothing after the `=` sign like this:
+
+    text_viewer_opts=
+    text_viewer_args=
 
 ## Depedencies
 
