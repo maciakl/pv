@@ -1,6 +1,10 @@
-# Previewer for LF
+# Previewer for the LF CLI File Manager
 
-This is a simple previewer for lf. It detects file type and then uses the appropriate previewer to display the file on the cli.
+This is a simple previewer for the [LF File Manager](https://github.com/gokcehan/lf). 
+
+It detects file type based on the file extension and then uses the appropriate previewer to display the file in the terminal.
+
+Sample preview of it working in tandem with `lf`:
 
 ![pv](https://raw.githubusercontent.com/maciakl/pv/refs/heads/main/screenshot.gif)
 
@@ -12,12 +16,11 @@ You can run `pv` on it's own:
 
     pv filename
 
-Or you can use it as a previewer in lf. Add this to your `lfrc`:
+This will simply output the preview of the file to the terminal:
 
-    set previewer pv
+![scr2](https://github.com/user-attachments/assets/2c50f80a-2095-414b-9248-cf9585f836b1)
 
-
-Usage:
+The program supports a couple of basic command line switches:
 
     Usage: pv.exe <file>
     Options:
@@ -25,12 +28,20 @@ Usage:
         -h, --help      Show this help
         -c, --config    Show configuration
 
+While it works as a stand alone program, `pv` has been designed specifically to work in tandem with `lf` in lieu of a shell specific script.
+
+To configure `pv` to be the default previewer for `lf` add the following line to your `lfrc` config file:
+
+    set previewer pv
 
 ## Configuration
 
-You can configure the previewers and their arguments by creating a `~/.pvrc` file (it's `%USERPROFILE%\.pvrc` on Windows).
+You can configure the previewers and their arguments by creating a config file named `.pvrc` 
 
-The format is simple:
+- On Linux, Unix and Mac put it in `~/.pvrc`
+- On Windows put it in `%USERPROFILE%\.pvrc`
+
+The format of the config file is simple:
 
     key=value
 
@@ -42,10 +53,16 @@ Here is an example:
     text_viewer_opts=--color=always
     text_viewer_args=--theme=dracula
     
-Each `viewer` has a corresponding `_args` and `_opts` setting, both of which are optional and only need to be specified if you want to override the defaults. Both are used to pass additional arguments to the viewer executable. The difference is as follows:
+Each `_viewer` has a corresponding `_args` and `_opts` setting, both of which are optional and only need to be specified if you want to override the defaults. Both are used to pass additional arguments to the viewer executable. The difference is as follows:
 
-- The `_opts` arguments are passed before the file path
-- The `_args` arguments are passed after the file path
+- The `_opts` are arguments or subcommands that are passed in before the file path
+- The `_args` are trailing arguments that are passed in after the file path
+
+For example:
+
+    default_viewer default_viewer_opts <file> default_viewer_args
+
+This is important, because some programs have positional arguments for input and output files.
 
 You can check the current configuration by running:
 
@@ -76,7 +93,10 @@ Following viewers are available to be overriden. Each one is listed alongside th
 
 Currently there is no way to change the file extension association via the configuration file.
 
-The "viewer" option need to be set to a string that represents a file name of an actual executables or executable script that is in your PATH and that outpus their results to stdout.
+The `_viewer` option needs to be set to a string that represents a file name of an actual executable (or an executable script) file. This file:
+
+- must be in your `$PATH` (or `%PATH%`)
+- must output directly to `stdout`
 
 ### Defaults
 
