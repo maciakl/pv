@@ -52,15 +52,15 @@ Here is an example:
     text_viewer=bat
     text_viewer_opts=--color=always
     text_viewer_args=--theme=dracula
+
+This will result in `pv` calling the previewer application `bat` when it is asked to open a text file. It will do so in the following way:
+
+    bat --color=always <file> --theme=dracula
     
 Each `_viewer` has a corresponding `_args` and `_opts` setting, both of which are optional and only need to be specified if you want to override the defaults. Both are used to pass additional arguments to the viewer executable. The difference is as follows:
 
 - The `_opts` are arguments or subcommands that are passed in before the file path
 - The `_args` are trailing arguments that are passed in after the file path
-
-For example:
-
-    default_viewer default_viewer_opts <file> default_viewer_args
 
 This is important, because some programs have positional arguments for input and output files.
 
@@ -93,7 +93,7 @@ Following viewers are available to be overriden. Each one is listed alongside th
 |`naked_viewer`| Used when a file has no extension|
 |`default_viewer`| Used when the file extension does not match any of the above|
 
-Currently there is no way to change the file extension association via the configuration file.
+Currently there is no way to change the file extension association via the configuration file, they are hard coded.
 
 The `_viewer` option needs to be set to a string that represents a file name of an actual executable (or an executable script) file. This file:
 
