@@ -9,7 +9,7 @@ import (
     "path/filepath"
 )
 
-const version = "0.3.0"
+const version = "0.3.1"
 
 var (
 
@@ -64,6 +64,14 @@ var (
     exe_viewer = "hexyl"
     exe_viewer_opts = ""
     exe_viewer_args = ""
+
+    log_viewer = "bat"
+    log_viewer_opts = "--color=always"
+    log_viewer_args = ""
+
+    naked_viewer = "bat"
+    naked_viewer_opts = "--color=always"
+    naked_viewer_args = ""
 
     default_viewer = "bat"
     default_viewer_opts = "--color=always"
@@ -182,6 +190,16 @@ func openFile(path string) {
             viewer_opts = text_viewer_opts
             viewer_args = text_viewer_args
 
+        case "Log":
+            viewer = log_viewer
+            viewer_opts = log_viewer_opts
+            viewer_args = log_viewer_args
+
+        case "Naked":
+            viewer = naked_viewer
+            viewer_opts = naked_viewer_opts
+            viewer_args = naked_viewer_args
+
         default:
             viewer = default_viewer
             viewer_opts = default_viewer_opts
@@ -238,6 +256,8 @@ func showConfig() {
     fmt.Println("\texcel_viewer:\t", excel_viewer, excel_viewer_opts, "<file>", excel_viewer_args)
     fmt.Println("\tweb_viewer:\t", web_viewer, web_viewer_opts, "<file>", web_viewer_args)
     fmt.Println("\texe_viewer:\t", exe_viewer, exe_viewer_opts, "<file>", exe_viewer_args)
+    fmt.Println("\tlog_viewer:\t", log_viewer, log_viewer_opts, "<file>", log_viewer_args)
+    fmt.Println("\tnaked_viewer:\t", naked_viewer, naked_viewer_opts, "<file>", naked_viewer_args)
     fmt.Println("\tdefault_viewer:\t", default_viewer, default_viewer_opts, "<file>", default_viewer_args)
     os.Exit(0)
 }
@@ -299,6 +319,12 @@ func getFileType(path string) string {
 
         case ".txt":
             return "Text"
+
+        case ".log":
+            return "Log"
+
+        case "":
+            return "Naked"
 
         default:
             return "Other"
@@ -412,6 +438,18 @@ func readConfig() {
                 exe_viewer_opts = value
             case "exe_viewer_args":
                 exe_viewer_args = value
+            case "log_viewer":
+                log_viewer = value
+            case "log_viewer_opts":
+                log_viewer_opts = value
+            case "log_viewer_args":
+                log_viewer_args = value
+            case "naked_viewer":
+                naked_viewer = value
+            case "naked_viewer_opts":
+                naked_viewer_opts = value
+            case "naked_viewer_args":
+                naked_viewer_args = value
             case "default_viewer":
                 default_viewer = value
             case "default_viewer_opts":

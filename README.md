@@ -88,7 +88,9 @@ Following viewers are available to be overriden. Each one is listed alongside th
 |`excel_viewer`| `xlsx` |
 |`web_viewer`| `html` `htm` `xhtml` `mhtml` `mht`|
 |`exe_viewer`|`exe` `dll` `msi` `sys` `msx`|
-|`text_viewer| `txt`|
+|`text_viewer`| `txt`|
+|`log_viewer`| `log`|
+|`naked_viewer`| Used when a file has no extension|
 |`default_viewer`| Used when the file extension does not match any of the above|
 
 Currently there is no way to change the file extension association via the configuration file.
@@ -117,7 +119,9 @@ Current defaults are:
         exeviewer:       hyxel <file>
         defaultviewer:   bat --color=always <file>
 
-Using `bat` as the default viewer is recommended as it usually works well with most file types.
+Using `bat` as the `default_viewer` is recommended as it usually works well with most file types (even binary ones).
+
+The `naked_viewer` option is set to `bat` by default as files with no extension are just as likely to be binary executables as they are to be shell scripts.
 
 ### Overriding Default Arguments
 
