@@ -17,92 +17,83 @@ Or you can use it as a previewer in lf. Add this to your `lfrc`:
     set previewer pv
 
 
+Usage:
+
+    Usage: pv.exe <file>
+    Options:
+        -v, --version   Show version
+        -h, --help      Show this help
+        -c, --config    Show configuration
+
+
 ## Configuration
 
 You can configure the previewers and their arguments by creating a `~/.pvrc` file (it's `%USERPROFILE%\.pvrc` on Windoes). 
 
 Here is an example:
     
-    imageviewer = chafa
-    mdviewer = glow
-    mdviewerargs = --style=dark
-    wordviewer = pandoc
-    wordviewerargs = --to=ansi
-    webviewer = w3m
-    webviewerargs = -dump
-    exeviewer = file
-    defaultviewer = less
+    image_viewer=chafa
+    md_viewer=glow
+    md_viewer_opts = --style=dark
+    word_viewer = pandoc
+    word_viewer_args = --to=ansi
+    web_viewer = w3m
+    exe_viewer = file
+    default_viewer = less
 
-You only have specify the "args" if you want to pass additional arguments to the previewer. If you don't specify a viewer for a given file type, the default viewer will be used.
+Each viewer has a corresponding `_args` and `_opts` setting, both of which are optional and only need to be specified if you want to override the defaults. Both are used to pass additional arguments to the viewer executable. The difference is as follows:
+
+- The `_opts` arguments are passed before the file path
+- The `_args` arguments are passed after the file path
 
 You can check the current configuration by running:
 
-    pv -version
+    pv -c
 
-It will display the program version as well as the current configuration.
+This will output the current configuration and corresponding opt and arg values.
 
-### Configuration options
+### Viewers
 
-The "viewer" options need to be actual executables or executable scripts that output their results to stdout. The "args" options are optional and can be any arguments you want to pass to the viewer.
+Following viewers are available:
 
 
-- `imageviewer` - used with the following file extensions: ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".svg", ".webp", ".ico", ".jit", ".jif", ".jfi"
-- `imageviewerargs` -  optional args for the image viewer
 
-- `mdviewer` - used with the following file extensions: ".md", ".markdown", ".mkd", ".mkdn", ".mdwn", ".mdown", ".mdtxt"
-- `mdviewerargs` - optional args for the markdown viewer
+- `image_viewer` - used with the following file extensions: ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".svg", ".webp", ".ico", ".jit", ".jif", ".jfi"
+- `md_viewer` - used with the following file extensions: ".md", ".markdown", ".mkd", ".mkdn", ".mdwn", ".mdown", ".mdtxt"
+- `pdf_viewer` - used with the following file extensions: ".pdf"
+- `music_viewer` - used with the following file extensions: ".mp3", ".flac", ".wav", ".ogg", ".m4a", ".wma", ".aac", ".aiff", ".alac", ".ape", ".dsd", ".dts", ".mka", ".mpc", ".ofr", ".ofs", ".opus", ".tak", ".tta", ".wv"
+- `video_viewer` - used with the following file extensions: ".mp4", ".mkv", ".webm", ".avi", ".mov", ".wmv", ".flv", ".3gp", ".mpg", ".mpeg", ".m2v", ".m4v", ".m2ts", ".ts", ".mts", ".vob", ".divx", ".xvid", ".rm", ".rmvb", ".asf", ".ogv", ".3g2", ".f4v", ".h264", ".h265", ".hevc", ".vp9", ".vp8", ".av1"
+- `zip_viewer` - used with the following file extensions: ".zip", ".jar"
+- `sevenz_viewer` - used with the following file extensions: ".7z"
+- `rar_viewer` - used with the following file extensions: ".rar"
+- `word_viewer` - used with the following file extensions: ".doc", ".docx", ".odt", ".rtf"
+- `excel_viewer` - used with the following file extensions: ".xlsx"
+- `web_viewer` - used with the following file extensions: ".html", ".htm", ".xhtml", ".mhtml", ".mht"
+- `exe_viewer` - used with the following file extensions: ".exe", ".dll", ".msi", ".sys", ".msx"
+- `text_viewer` - used with the following extensions: ".txt"
+- `default_viewer` - used when no other viewer is specified
 
-- `pdfviewer` - used with the following file extensions: ".pdf"
-- `pdfviewerargs` - optional args for the pdf viewer
 
-- `musicviewer` - used with the following file extensions: ".mp3", ".flac", ".wav", ".ogg", ".m4a", ".wma", ".aac", ".aiff", ".alac", ".ape", ".dsd", ".dts", ".mka", ".mpc", ".ofr", ".ofs", ".opus", ".tak", ".tta", ".wv"
-- `musicviewerargs` - optional args for the music viewer
-
-- `videoviewer` - used with the following file extensions: ".mp4", ".mkv", ".webm", ".avi", ".mov", ".wmv", ".flv", ".3gp", ".mpg", ".mpeg", ".m2v", ".m4v", ".m2ts", ".ts", ".mts", ".vob", ".divx", ".xvid", ".rm", ".rmvb", ".asf", ".ogv", ".3g2", ".f4v", ".h264", ".h265", ".hevc", ".vp9", ".vp8", ".av1"
-- `videoviewerargs` = ""
-
-- `zipviewer` - used with the following file extensions: ".zip", ".jar"
-- `zipviewerargs` - optional args for the zip viewer
-
-- `sevenzviewer` - used with the following file extensions: ".7z"
-- `sevenzviewerargs` - optional args for the 7z viewer
-
-- `rarviewer` - used with the following file extensions: ".rar"
-- `rarviewerargs` - optional args for the rar viewer
-
-- `wordviewer` - used with the following file extensions: ".doc", ".docx", ".odt", ".rtf"
-- `wordviewerargs` - optional args for the word viewer
-
-- `excelviewer` - used with the following file extensions: ".xlsx"
-- `excelviewerargs` - optional args for the excel viewer
-
-- `webviewer` - used with the following file extensions: ".html", ".htm", ".xhtml", ".mhtml", ".mht"
-- `webviewerargs` - optional args for the web viewer
-
-- `exeviewer` - used with the following file extensions: ".exe", ".dll", ".msi", ".sys", ".msx"
-- `exeviewerargs` - optional args for the exe viewer
-
-- `defaultviewer` - used when no other viewer is specified
-- `defaultviewerargs` - optional args for the default viewer
-
-Using `bat` as the default viewer is recommended as it usually works well with most file types.
+The "viewer" options need to be actual executables or executable scripts that output their results to stdout.
 
 Current defaults are:
 
-        imageviewer:     chafa
-        textviewer:      bat
-        mdviewer:        glow --style=dracula
-        pdfviewer:       pdftotext -
+        imageviewer:     chafa <file>
+        textviewer:      bat --color=always <file> --theme=dracula
+        mdviewer:        glow --style=dracula <file>
+        pdfviewer:       pdftotext <file> -
         musicviewer:     exiftool
         videoviewer:     exiftool
-        zipviewer:       unzip -l
-        sevenzviewer:    7z l
-        rarviewer:       unrar l
-        wordviewer:      pandoc --to=plain
-        excelviewer:     xlsx2csv -o=-
-        webviewer:       lynx -dump
-        exeviewer:       exiftool
-        defaultviewer:   bat --color=always
+        zipviewer:       unzip -l <file>
+        sevenzviewer:    7z l <file>
+        rarviewer:       unrar l <file>
+        wordviewer:      pandoc --to=plain <file>
+        excelviewer:     xlsx2csv -o=- <file>
+        webviewer:       lynx -dump <file>
+        exeviewer:       hyxel <file>
+        defaultviewer:   bat --color=always <file>
+
+Using `bat` as the default viewer is recommended as it usually works well with most file types.
 
 ## Depedencies
 
@@ -117,6 +108,7 @@ The default previewers are:
 - [poppler](https://poppler.freedesktop.org/) (for pdf files)
 - [pandoc](https://pandoc.org/) (for word and rtf files)
 - [lynx](https://lynx.invisible-island.net/) (for html files)
+- [hyxel](https://github.com/sharkdp/hexyl) (for exe files)
 - For archive files you need: `unzip`, `7z`, `unrar`
 
 
@@ -144,6 +136,7 @@ First get [scoop](https://scoop.sh/). Then install all the prerequisites with:
     scoop install unzip
     scoop install 7z
     scoop install unrar
+    scoop install hyxel
 
 Then add my bucket and install `pv`:
     
