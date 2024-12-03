@@ -9,7 +9,7 @@ import (
     "path/filepath"
 )
 
-const version = "0.4.0"
+const version = "0.4.1"
 
 var (
 
@@ -69,10 +69,6 @@ var (
     log_viewer_opts = "--color=always"
     log_viewer_args = ""
 
-    naked_viewer = "bat"
-    naked_viewer_opts = "--color=always"
-    naked_viewer_args = ""
-
     tar_viewer = "tar"
     tar_viewer_opts = "-tvf"
     tar_viewer_args = ""
@@ -89,7 +85,18 @@ var (
     bz2_viewer_opts = "-jtvf"
     bz2_viewer_args = ""
 
+    ebook_viewer = "epy"
+    ebook_viewer_opts = "-d"
+    ebook_viewer_args = ""
 
+
+
+
+
+
+    naked_viewer = "bat"
+    naked_viewer_opts = "--color=always"
+    naked_viewer_args = ""
 
 
     default_viewer = "bat"
@@ -234,6 +241,12 @@ func openFile(path string) {
             viewer_opts = bz2_viewer_opts
             viewer_args = bz2_viewer_args
 
+        case "Ebook":
+            viewer = ebook_viewer
+            viewer_opts = ebook_viewer_opts
+            viewer_args = ebook_viewer_args
+
+
 
         case "Naked":
             viewer = naked_viewer
@@ -301,6 +314,7 @@ func showConfig() {
     fmt.Println("\tgz_viewer:\t", gz_viewer, gz_viewer_opts, "<file>", gz_viewer_args)
     fmt.Println("\txz_viewer:\t", xz_viewer, xz_viewer_opts, "<file>", xz_viewer_args)
     fmt.Println("\tbz2_viewer:\t", bz2_viewer, bz2_viewer_opts, "<file>", bz2_viewer_args)
+    fmt.Println("\tebook_viewer:\t", ebook_viewer, ebook_viewer_opts, "<file>", ebook_viewer_args)
     fmt.Println("\tnaked_viewer:\t", naked_viewer, naked_viewer_opts, "<file>", naked_viewer_args)
     fmt.Println("\tdefault_viewer:\t", default_viewer, default_viewer_opts, "<file>", default_viewer_args)
     os.Exit(0)
@@ -378,6 +392,9 @@ func getFileType(path string) string {
 
         case ".bz2":
             return "Bz2"
+
+        case ".epub", ".epub3", ".mobi", ".azw", ".azw3", ".fb2":
+            return "Ebook"
 
         case "":
             return "Naked"
@@ -524,6 +541,14 @@ func readConfig() {
                 bz2_viewer_opts = value
             case "bz2_viewer_args":
                 bz2_viewer_args = value
+            case "ebook_viewer":
+                ebook_viewer = value
+            case "ebook_viewer_opts":
+                ebook_viewer_opts = value
+            case "ebook_viewer_args":
+                ebook_viewer_args = value
+
+
             case "naked_viewer":
                 naked_viewer = value
             case "naked_viewer_opts":
