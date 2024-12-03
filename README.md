@@ -167,6 +167,12 @@ Install via go:
  
     go install github.com/maciakl/pv@latest
 
+### On Linux
+
+One liner to fetch and install the binary into `/usr/local/bin`:
+
+    wget -qN 'https://github.com/maciakl/pv/releases/latest/download/pv_lin.zip' && unzip -oq pv_lin.zip && rm -f pv_lin.zip && chmod +x pv && sudo mv pv /usr/local/bin
+
 ### On Windows
 
 First get [scoop](https://scoop.sh/). 
