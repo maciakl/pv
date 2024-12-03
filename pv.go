@@ -9,7 +9,7 @@ import (
     "path/filepath"
 )
 
-const version = "0.3.2"
+const version = "0.4.0"
 
 var (
 
@@ -72,6 +72,25 @@ var (
     naked_viewer = "bat"
     naked_viewer_opts = "--color=always"
     naked_viewer_args = ""
+
+    tar_viewer = "tar"
+    tar_viewer_opts = "-tvf"
+    tar_viewer_args = ""
+
+    gz_viewer = "tar"
+    gz_viewer_opts = "-ztvf"
+    gz_viewer_args = ""
+
+    xz_viewer = "tar"
+    xz_viewer_opts = "-Jtvf"
+    xz_viewer_args = ""
+
+    bz2_viewer = "tar"
+    bz2_viewer_opts = "-jtvf"
+    bz2_viewer_args = ""
+
+
+
 
     default_viewer = "bat"
     default_viewer_opts = "--color=always"
@@ -195,6 +214,27 @@ func openFile(path string) {
             viewer_opts = log_viewer_opts
             viewer_args = log_viewer_args
 
+        case "Tar":
+            viewer = tar_viewer
+            viewer_opts = tar_viewer_opts
+            viewer_args = tar_viewer_args
+
+        case "Gz":
+            viewer = gz_viewer
+            viewer_opts = gz_viewer_opts
+            viewer_args = gz_viewer_args
+
+        case "Xz":
+            viewer = xz_viewer
+            viewer_opts = xz_viewer_opts
+            viewer_args = xz_viewer_args
+
+        case "Bz2":
+            viewer = bz2_viewer
+            viewer_opts = bz2_viewer_opts
+            viewer_args = bz2_viewer_args
+
+
         case "Naked":
             viewer = naked_viewer
             viewer_opts = naked_viewer_opts
@@ -257,6 +297,10 @@ func showConfig() {
     fmt.Println("\tweb_viewer:\t", web_viewer, web_viewer_opts, "<file>", web_viewer_args)
     fmt.Println("\texe_viewer:\t", exe_viewer, exe_viewer_opts, "<file>", exe_viewer_args)
     fmt.Println("\tlog_viewer:\t", log_viewer, log_viewer_opts, "<file>", log_viewer_args)
+    fmt.Println("\ttar_viewer:\t", tar_viewer, tar_viewer_opts, "<file>", tar_viewer_args)
+    fmt.Println("\tgz_viewer:\t", gz_viewer, gz_viewer_opts, "<file>", gz_viewer_args)
+    fmt.Println("\txz_viewer:\t", xz_viewer, xz_viewer_opts, "<file>", xz_viewer_args)
+    fmt.Println("\tbz2_viewer:\t", bz2_viewer, bz2_viewer_opts, "<file>", bz2_viewer_args)
     fmt.Println("\tnaked_viewer:\t", naked_viewer, naked_viewer_opts, "<file>", naked_viewer_args)
     fmt.Println("\tdefault_viewer:\t", default_viewer, default_viewer_opts, "<file>", default_viewer_args)
     os.Exit(0)
@@ -322,6 +366,18 @@ func getFileType(path string) string {
 
         case ".log":
             return "Log"
+
+        case ".tar":
+            return "Tar"
+
+        case ".gz":
+            return "Gz"
+
+        case ".xz":
+            return "Xz"
+
+        case ".bz2":
+            return "Bz2"
 
         case "":
             return "Naked"
@@ -444,6 +500,30 @@ func readConfig() {
                 log_viewer_opts = value
             case "log_viewer_args":
                 log_viewer_args = value
+            case "tar_viewer":
+                tar_viewer = value
+            case "tar_viewer_opts":
+                tar_viewer_opts = value
+            case "tar_viewer_args":
+                tar_viewer_args = value
+            case "gz_viewer":
+                gz_viewer = value
+            case "gz_viewer_opts":
+                gz_viewer_opts = value
+            case "gz_viewer_args":
+                gz_viewer_args = value
+            case "xz_viewer":
+                xz_viewer = value
+            case "xz_viewer_opts":
+                xz_viewer_opts = value
+            case "xz_viewer_args":
+                xz_viewer_args = value
+            case "bz2_viewer":
+                bz2_viewer = value
+            case "bz2_viewer_opts":
+                bz2_viewer_opts = value
+            case "bz2_viewer_args":
+                bz2_viewer_args = value
             case "naked_viewer":
                 naked_viewer = value
             case "naked_viewer_opts":
