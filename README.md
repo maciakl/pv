@@ -90,6 +90,10 @@ Following viewers are available to be overriden. Each one is listed alongside th
 |`exe_viewer`|`exe` `dll` `msi` `sys` `msx`|
 |`text_viewer`| `txt`|
 |`log_viewer`| `log`|
+|`tar_viewer`| `tar`|
+|`gz_viewer`| `gz`|
+|`xz_viewer`| `xz`|
+|`bzip2_viewer`| `bz2`|
 |`naked_viewer`| Used when a file has no extension|
 |`default_viewer`| Used when the file extension does not match any of the above|
 
@@ -118,6 +122,10 @@ Current defaults are:
         web_viewer:       lynx -dump <file>
         exe_viewer:       hyxel <file>
         log_viewer:       bat --color=always <file>
+        tar_viewer:       tar -tvf <file>
+        gz_viewer:        tar -ztvf <file>
+        xz_viewer:        tar -Jtvf <file>
+        bz2_viewer:       tar -jtvf <file>
         naked_viewer:     bat --color=always <file>
         defaultviewer:    bat --color=always <file>
 
@@ -146,7 +154,7 @@ The default previewers are:
 - [pandoc](https://pandoc.org/) (for word and rtf files)
 - [lynx](https://lynx.invisible-island.net/) (for html files)
 - [hyxel](https://github.com/sharkdp/hexyl) (for exe files)
-- For archive files you need: `unzip`, `7z`, `unrar`
+- For archive files you need: `unzip`, `7z`, `unrar` and `tar`
 
 ## Installation
 
