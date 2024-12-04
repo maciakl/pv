@@ -171,8 +171,8 @@ Install via go:
 
 One liner to fetch and install the binary into `/usr/local/bin`:
 
-    wget -qN 'https://github.com/maciakl/pv/releases/latest/download/pv_lin.zip' && unzip -oq pv_lin.zip && rm -f pv_lin.zip && chmod +x pv && sudo mv pv /usr/local/bin
-
+    p="pv" && wget -qN "https://github.com/maciakl/${p}/releases/latest/download/${p}_lin.zip" && unzip -oq ${p}_lin.zip && rm -f ${p}_lin.zip && chmod +x ${p} && sudo mv ${p} /usr/local/bin
+    
 ### On Windows
 
 First get [scoop](https://scoop.sh/). 
